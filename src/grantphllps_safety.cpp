@@ -11,9 +11,9 @@ ros::Publisher brake_pub, brake_bool_pub;
 std_msgs::Bool brake_bool_msg;
 ackermann_msgs::AckermannDriveStamped brake_msg;
 
-float angleIncrement = 0.00582315586507;    //Radians, from the /scan rostopic
+float angleIncrement = 0.00436332309619;    //Radians, from the /scan rostopic
 float* vx = new float;                      //Pointer to the current speed variable
-float ttcThreshold = 0.320;                 //Minimum time-to-collision before applying the brake
+float ttcThreshold = 0.70;                 //Minimum time-to-collision before applying the brake
 float zero = 0.0;                           //Just a 0,0 as a float
 
 void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg) {
@@ -21,7 +21,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg) {
     float rDot;
     float angle;
     float tcc;
-    float v = *vx;
+    float v = 1.5;
     for (int i = 0; i < msg->ranges.size(); i++) {
         //For each beam, calculate its angle, and the velocity the car is moving in that direction
         angle = i * angleIncrement;
@@ -29,6 +29,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg) {
         rDot = std::max(rDot,zero);
         //Calculate the time-to-collision in this direction
         tcc = msg->ranges[i] / rDot;
+	//std::cout << tcc << std::endl;
         //Filter out the -Inf's
         if (tcc < 0)
             tcc = 100000;
@@ -54,7 +55,7 @@ int main(int argc, char **argv)
 
   ros::Subscriber scan_sub = n.subscribe("/scan", 1, scanCallback);
   ros::Subscriber odom_sub = n.subscribe("/odom", 1, odometryCallback);
-  brake_pub = n.advertise<ackermann_msgs::AckermannDriveStamped>("/brake",1);
+  brake_pub = n.advertise<ackermann_msgs::AckermannDriveStamped>("/vesc/high_level/ackermann_cmd_mux/input/nav_0",1);
   brake_bool_pub = n.advertise<std_msgs::Bool>("/brake_bool",1);
 
   ros::spin();
