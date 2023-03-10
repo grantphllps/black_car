@@ -29,7 +29,7 @@ void scanCallback(const sensor_msgs::LaserScan::ConstPtr& msg) {
         rDot = std::max(rDot,zero);
         //Calculate the time-to-collision in this direction
         tcc = msg->ranges[i] / rDot;
-	//std::cout << tcc << std::endl;
+	std::cout << tcc << std::endl;
         //Filter out the -Inf's
         if (tcc < 0)
             tcc = 100000;
