@@ -68,7 +68,7 @@ int main(int argc, char **argv)
   ros::Subscriber scan_sub = n.subscribe("/scan", 1, scanCallback);
   ros::Subscriber odom_sub = n.subscribe("/odom", 1, odometryCallback);
   brake_pub = n.advertise<ackermann_msgs::AckermannDriveStamped>("/vesc/high_level/ackermann_cmd_mux/input/nav_0",1);
-  ttc_pub = n.advertise<std_msgs::Float64>("/ttc",1);
+  ttc_pub = n.advertise<std_msgs::Float64>("/ttc_threshold",1);
   ttc_min_pub = n.advertise<std_msgs::Float64>("/ttc_min",1);
   brake_bool_pub = n.advertise<std_msgs::Bool>("/brake_bool",1);
 
