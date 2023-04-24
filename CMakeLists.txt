@@ -31,3 +31,9 @@ include_directories(
 
 add_executable(grantphllps_safety src/grantphllps_safety.cpp)
 target_link_libraries(grantphllps_safety ${catkin_LIBRARIES})
+
+add_executable(car_controller src/car_controller.cpp)
+target_link_libraries(car_controller ${catkin_LIBRARIES})
+
+add_executable(error_provider src/error_provider.cpp)
+target_link_libraries(error_provider ${catkin_LIBRARIES})
