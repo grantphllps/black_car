@@ -1,10 +1,7 @@
 <launch>
     <rosparam command="load" file="$(find black_car)/settings.yaml"/>
-    <node pkg="black_car" name="car_controller" type="car_controller" output="screen">
+    <node pkg="black_car" name="follow_the_gap" type="follow_the_gap" output="screen">
         <remap from="/drive" to="/vesc/high_level/ackermann_cmd_mux/input/nav_0"/>
-    
-    </node>
-    <node pkg="black_car" name="error_provider" type="error_provider" output="screen"> 
     
     </node>
 </launch>

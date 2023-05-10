@@ -37,3 +37,6 @@ target_link_libraries(car_controller ${catkin_LIBRARIES})
 
 add_executable(error_provider src/error_provider.cpp)
 target_link_libraries(error_provider ${catkin_LIBRARIES})
+
+add_executable(follow_the_gap src/follow_the_gap.cpp)
+target_link_libraries(follow_the_gap ${catkin_LIBRARIES})
